@@ -15,7 +15,7 @@ const PlaceInfo = (place) => {
             <h5 className="fw-bold text-dark">{place.name}</h5>
             <div className="placeTypeinfo">{place.locationType}</div>
           </div>
-          <div className="placeDist">{place.distance}</div>
+          <div className="placeDist">{place.distance}km</div>
         </div>
         <div className="placeAddr">{place.address}</div>
         <div className="placeIcon">

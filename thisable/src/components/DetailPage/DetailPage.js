@@ -48,7 +48,7 @@ function DetailPage() {
         {reviewCount && (
           <div className="placerate">
             <Rating ratingValue={reviewCount.average * 20} readonly />(
-            {reviewCount.count})
+            {reviewCount.count} reviews)
           </div>
         )}
         <div className="placeiconlist">
