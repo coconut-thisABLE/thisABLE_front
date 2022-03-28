@@ -21,9 +21,6 @@ function CardComponent(props) {
           />
         </a>
       }
-      // actions={[
-      //         <Icon type="ellipsis" key="ellipsis" />
-      // ]}
     >
       <Meta
         title={props.cardInfo.fields.stack.stringValue}

@@ -16,7 +16,6 @@ function Chatbot() {
   }, []);
 
   const textQuery = async (text) => {
-    //  First  Need to  take care of the message I sent
     let conversation = {
       who: "user",
       content: {
@@ -25,18 +24,14 @@ function Chatbot() {
         },
       },
     };
-
     dispatch(saveMessage(conversation));
-    // console.log('text I sent', conversation)
 
-    // We need to take care of the message Chatbot sent
     const textQueryVariables = {
       text, //== text: text
     };
     try {
-      //I will send request to the textQuery ROUTE
       const response = await Axios.post(
-        "/api/dialogflow/textQuery",
+        process.env.REACT_APP_CHATBOT_TEXT_URL,
         textQueryVariables
       );
 
@@ -45,7 +40,6 @@ function Chatbot() {
           who: "bot",
           content: content,
         };
-
         dispatch(saveMessage(conversation));
       }
     } catch (error) {
@@ -62,14 +56,12 @@ function Chatbot() {
   };
 
   const eventQuery = async (event) => {
-    // We need to take care of the message Chatbot sent
     const eventQueryVariables = {
       event,
     };
     try {
-      //I will send request to the textQuery ROUTE
       const response = await Axios.post(
-        "/api/dialogflow/eventQuery",
+        process.env.REACT_APP_CHATBOT_EVENT_URL,
         eventQueryVariables
       );
       for (let content of response.data.fulfillmentMessages) {
@@ -97,8 +89,6 @@ function Chatbot() {
       if (!e.target.value) {
         return alert("you need to type somthing first");
       }
-
-      //we will send request to text query route
       textQuery(e.target.value);
       e.target.value = "";
     }
@@ -110,9 +100,7 @@ function Chatbot() {
 
   const renderOneMessage = (message, i) => {
     console.log("message", message);
-    // we need to give some condition here to separate message kinds
 
-    // template for normal text
     if (message.content && message.content.text && message.content.text.text) {
       return (
         <Message key={i} who={message.who} text={message.content.text.text} />
@@ -135,7 +123,6 @@ function Chatbot() {
         </div>
       );
     }
-    // template for card message
   };
 
   const renderMessage = (returnedMessages) => {
