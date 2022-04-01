@@ -1,4 +1,3 @@
-import { clear } from "@testing-library/user-event/dist/clear";
 import React, { useState, useEffect } from "react";
 import { Rating } from "react-simple-star-rating";
 import {
@@ -28,16 +27,9 @@ function ReviewPage({ locationId }) {
     const averageNum = await getReviewAverage(locationId);
     setReviews(reviewList);
     setReviewNum(averageNum.count);
-  }, [locationId, sort]);
+  });
 
   const [inputValue, setInputValue] = useState("");
-
-  const clear = () => {
-    setInputValue("");
-    setRating(0);
-    setSort("createdAt");
-  };
-
   const [recommend, setRecommend] = useState(0);
   const [discourage, setDiscourage] = useState(0);
 
@@ -143,9 +135,12 @@ function ReviewPage({ locationId }) {
         />
         <button
           className="reviewinputbutton"
-          onClick={() =>
-            postReview(userType, locationId, inputValue, rating) && clear()
-          }
+          onClick={() => {
+            postReview(userType, locationId, inputValue, rating);
+            setInputValue("");
+            setRating(0);
+            setSort("createdAt");
+          }}
         >
           Register
         </button>
