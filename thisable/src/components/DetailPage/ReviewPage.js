@@ -7,8 +7,8 @@ import {
   postReviewRecommend,
   postReviewDiscourage,
 } from "../../services/user.service";
-import thumbsup from "../../assets/images/thumbs_up.svg";
-import thumbsdown from "../../assets/images/thumbs_down.svg";
+import thumbsUp from "../../assets/images/thumbs_up.svg";
+import thumbsDown from "../../assets/images/thumbs_down.svg";
 
 function ReviewPage({ locationId }) {
   const [reviews, setReviews] = useState("");
@@ -19,7 +19,6 @@ function ReviewPage({ locationId }) {
 
   const handleRating = (rate) => {
     setRating(rate / 20);
-    console.log(rating);
   };
 
   useEffect(async () => {
@@ -27,11 +26,9 @@ function ReviewPage({ locationId }) {
     const averageNum = await getReviewAverage(locationId);
     setReviews(reviewList);
     setReviewNum(averageNum.count);
-  });
+  }, [locationId, sort, reviews]);
 
   const [inputValue, setInputValue] = useState("");
-  const [recommend, setRecommend] = useState(0);
-  const [discourage, setDiscourage] = useState(0);
 
   const renderReviews =
     reviews &&
@@ -47,7 +44,7 @@ function ReviewPage({ locationId }) {
               <div className="reviewuser">{review.userType}</div>
             </div>
             <div className="reviewdate">
-              {review.createdAt.replace("T", " ").substring(0, 10)}
+              {review.createdAt.substring(0, 10)}
             </div>
           </div>
           <div className="reviewcontent">{review.detail}</div>
@@ -55,12 +52,12 @@ function ReviewPage({ locationId }) {
             <button className="helpbutton">
               <div
                 className="buttondisplay"
-                onClick={() =>
-                  postReviewRecommend(review._id) && setRecommend(good + 1)
-                }
+                onClick={() => {
+                  postReviewRecommend(review._id);
+                }}
               >
                 <img
-                  src={thumbsup}
+                  src={thumbsUp}
                   style={{
                     width: "1rem",
                     marginRight: "0.4rem",
@@ -70,7 +67,6 @@ function ReviewPage({ locationId }) {
                 ></img>
                 Helpful
               </div>
-              {/* <div className="helpbuttonnum">{recommend}</div> */}
               <div className="helpbuttonnum">{review.good}</div>
             </button>
             <button className="helpbutton">
@@ -79,7 +75,7 @@ function ReviewPage({ locationId }) {
                 onClick={() => postReviewDiscourage(review._id)}
               >
                 <img
-                  src={thumbsdown}
+                  src={thumbsDown}
                   style={{
                     width: "1rem",
                     marginRight: "0.4rem",
