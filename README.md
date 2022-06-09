@@ -1,8 +1,9 @@
 # thisABLE - frontend 
 This is the frontend repository! <br />
-👉🏻[Click here](https://github.com/coconut-thisABLE)👈 if you want to see the full README.
+Please 👉🏻[Click here](https://github.com/coconut-thisABLE)👈 to see the full README. <br />
+Below is part of the entire README. I recommend you go to the link above and see the entire README!
 
-
+---
 
 ### 🥥 Demo Video
 [![thumbnail](https://user-images.githubusercontent.com/49112482/160967958-ff06b967-4004-46ce-940f-2360381d8305.png)](https://youtu.be/_5tZRegFqG8)
